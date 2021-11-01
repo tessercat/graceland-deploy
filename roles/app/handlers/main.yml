@@ -1,0 +1,7 @@
+---
+- name: Restart nginx service
+  listen:
+      - restart player nginx service
+  systemd:
+      name: nginx.service
+      state: restarted

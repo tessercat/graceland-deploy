@@ -1,0 +1,66 @@
+---
+
+# PHP.
+
+- name: Packages
+  apt:
+      name: php-fpm
+      state: present
+
+
+# App.
+
+- name: Deployment directory
+  file:
+      path: /opt/player
+      state: directory
+      owner: root
+      group: root
+      mode: 0755
+
+- name: App directory
+  file:
+      path: /opt/player/app
+      state: directory
+      owner: www-data
+      group: www-data
+      mode: 0700
+
+- name: Media directory
+  file:
+      path: /opt/player/media
+      state: directory
+      owner: www-data
+      group: www-data
+      mode: 0700
+
+- Name: Favicon
+  copy:
+      src: favicon.ico
+      dest: /opt/player/media/favicon.ico
+      owner: www-data
+      group: www-data
+      mode: 0644
+
+- name: App
+  become: true
+  become_user: www-data
+  git:
+      repo: "{{ app_repo }}"
+      dest: /opt/player/app
+      version: "{{ app_version }}"
+      force: true
+
+- name: Nginx
+  notify:
+      - restart player nginx service
+  template:
+      src: nginx.conf
+      dest: /etc/nginx/conf.d/player.conf
+      mode: 0644
+
+
+# Handlers.
+
+- name: Handlers
+  meta: flush_handlers

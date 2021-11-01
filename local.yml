@@ -1,0 +1,12 @@
+---
+- name: Deploy player
+  hosts: 127.0.0.1
+  connection: local
+  become: false
+  gather_facts: false
+  vars:
+      app_repo: https://github.com/tessercat/player-app.git
+      app_version: dev
+
+  roles:
+      - {role: app, tags: [app]}
