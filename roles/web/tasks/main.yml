@@ -1,26 +1,20 @@
 ---
-
-# PHP.
-
 - name: Packages
   apt:
       name: php-fpm
       state: present
 
-
-# App.
-
 - name: Deployment directory
   file:
-      path: /opt/player
+      path: /opt/graceland
       state: directory
       owner: root
       group: root
       mode: 0755
 
-- name: App directory
+- name: Web directory
   file:
-      path: /opt/player/app
+      path: /opt/graceland/web
       state: directory
       owner: www-data
       group: www-data
@@ -28,35 +22,27 @@
 
 - name: Media directory
   file:
-      path: /opt/player/media
+      path: /opt/graceland/media
       state: directory
       owner: www-data
       group: www-data
       mode: 0700
 
-- name: Favicon
-  copy:
-      src: favicon.ico
-      dest: /opt/player/media/favicon.ico
-      owner: www-data
-      group: www-data
-      mode: 0644
-
-- name: App
+- name: Web
   become: true
   become_user: www-data
   git:
-      repo: "{{ app_repo }}"
-      dest: /opt/player/app
-      version: "{{ app_version }}"
+      repo: "{{ web_repo }}"
+      dest: /opt/graceland/web
+      version: "{{ web_version }}"
       force: true
 
 - name: Nginx
   notify:
-      - restart player nginx service
+      - restart graceland nginx service
   template:
       src: nginx.conf
-      dest: /etc/nginx/conf.d/player.conf
+      dest: /etc/nginx/conf.d/graceland.conf
       mode: 0644
 
 

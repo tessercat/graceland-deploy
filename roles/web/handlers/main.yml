@@ -1,7 +1,7 @@
 ---
 - name: Restart nginx service
   listen:
-      - restart player nginx service
+      - restart graceland nginx service
   systemd:
       name: nginx.service
       state: restarted

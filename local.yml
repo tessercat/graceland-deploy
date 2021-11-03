@@ -5,8 +5,8 @@
   become: false
   gather_facts: false
   vars:
-      app_repo: https://github.com/tessercat/player-app.git
-      app_version: dev
+      web_repo: https://github.com/tessercat/player-app.git
+      web_version: dev
 
   roles:
-      - {role: app, tags: [app]}
+      - {role: web, tags: [web]}

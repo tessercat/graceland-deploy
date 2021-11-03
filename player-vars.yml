@@ -1,5 +1,0 @@
----
-# Player role variables. Edit as required.
-
-# One of stack-vars hostname or other_hostnames. Required.
-player_hostname: "graceland.ca"

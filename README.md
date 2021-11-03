@@ -1,6 +1,6 @@
 This repo contains an Ansible role
-to install the
-[player-app](https://github.com/tessercat/player-app)
+to install
+[graceland-web](https://github.com/tessercat/graceland-web)
 on the
 [stack-deploy](https://github.com/tessercat/stack-deploy)
 stack.
