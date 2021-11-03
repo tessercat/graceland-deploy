@@ -1,8 +1,9 @@
 ---
 - name: Packages
   apt:
-      name: php-fpm
-      state: present
+      pkg:
+        - php-fpm
+        - php-ds
 
 - name: Deployment directory
   file:
