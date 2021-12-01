@@ -3,7 +3,6 @@
   apt:
       pkg:
         - php-fpm
-        - php-markdown
 
 - name: Deployment directory
   file:
