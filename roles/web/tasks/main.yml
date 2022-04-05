@@ -1,11 +1,11 @@
 ---
 - name: Packages
-  apt:
+  ansible.builtin.apt:
       pkg:
           - php-fpm
 
 - name: Deployment directory
-  file:
+  ansible.builtin.file:
       path: /opt/graceland
       state: directory
       owner: root
@@ -13,7 +13,7 @@
       mode: 0755
 
 - name: Web directory
-  file:
+  ansible.builtin.file:
       path: /opt/graceland/web
       state: directory
       owner: www-data
@@ -21,7 +21,7 @@
       mode: 0700
 
 - name: Media directory
-  file:
+  ansible.builtin.file:
       path: /opt/graceland/media
       state: directory
       owner: www-data
@@ -31,7 +31,7 @@
 - name: Web
   become: true
   become_user: www-data
-  git:
+  ansible.builtin.git:
       repo: "{{ web_repo }}"
       dest: /opt/graceland/web
       version: "{{ web_version }}"
@@ -40,7 +40,7 @@
 - name: Nginx
   notify:
       - restart graceland nginx service
-  template:
+  ansible.builtin.template:
       src: nginx.conf
       dest: /etc/nginx/conf.d/graceland.conf
       mode: 0644
@@ -49,4 +49,4 @@
 # Handlers.
 
 - name: Handlers
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
