@@ -5,8 +5,7 @@
   become: false
   gather_facts: false
   vars:
-      web_repo: https://github.com/tessercat/graceland-web.git
-      web_version: dev
-
+      graceland_web_repo: https://github.com/tessercat/graceland-web.git
+      graceland_web_version: dev
   roles:
       - {role: web, tags: [web]}

@@ -32,9 +32,9 @@
   become: true
   become_user: www-data
   ansible.builtin.git:
-      repo: "{{ web_repo }}"
+      repo: "{{ graceland_web_repo }}"
       dest: /opt/graceland/web
-      version: "{{ web_version }}"
+      version: "{{ graceland_web_version }}"
       force: true
 
 - name: Nginx
